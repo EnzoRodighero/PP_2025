@@ -4,8 +4,9 @@ Descrição:
 -----------
 Ao clonar ou baixar este projeto do GitHub, é possível que você encontre o seguinte erro ao tentar compilar ou executar no Visual Studio:
 
-Couldn't process file Views\Frm.resx due to its being in the Internet or Restricted zone or having the mark of the web on the file.
-Couldn't process file Views\FrmPrincipal.resx due to its being in the Internet or Restricted zone or having the mark of the web on the file.
+"Couldn't process file Views\Frm.resx due to its being in the Internet or Restricted zone or having the mark of the web on the file."
+
+"Couldn't process file Views\FrmPrincipal.resx due to its being in the Internet or Restricted zone or having the mark of the web on the file."
 
 Esse erro acontece porque o Windows aplica uma marca de segurança chamada "Mark of the Web" (MOTW) em arquivos baixados da internet. Essa marca impede que o Visual Studio processe corretamente arquivos como .resx, .csproj e outros.
 
