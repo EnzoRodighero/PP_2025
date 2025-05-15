@@ -53,4 +53,3 @@ Observações finais:
 --------------------
 - Sempre extraia o arquivo ZIP antes de abrir o projeto se ele foi baixado compactado.
 - Se o projeto estiver dentro de uma pasta do OneDrive, Google Drive, etc., isso pode interferir nas permissões. Prefira pastas locais.
-- 
