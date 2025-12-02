@@ -1,0 +1,634 @@
+USE [PP_2025]
+GO
+/****** Object:  Table [dbo].[tb_cargos]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_cargos](
+	[id_cargo] [int] IDENTITY(1,1) NOT NULL,
+	[status_cargo] [varchar](1) NULL,
+	[cargo] [varchar](100) NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_cargo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[cargo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_categorias]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_categorias](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Foto] [varbinary](max) NULL,
+	[Nome] [varchar](150) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_cidades]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_cidades](
+	[id_cidade] [int] IDENTITY(1,1) NOT NULL,
+	[nome] [varchar](100) NULL,
+	[DDD] [varchar](3) NULL,
+	[id_estado] [int] NOT NULL,
+	[status_cidade] [varchar](1) NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_cidade] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_clientes]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_clientes](
+	[id_cliente] [int] IDENTITY(1,1) NOT NULL,
+	[status_cliente] [varchar](1) NULL,
+	[nome] [varchar](50) NULL,
+	[sexo] [varchar](1) NULL,
+	[apelido] [varchar](50) NULL,
+	[rg] [varchar](30) NULL,
+	[cpf] [varchar](20) NULL,
+	[email] [varchar](200) NULL,
+	[telefone] [varchar](30) NULL,
+	[celular] [varchar](30) NULL,
+	[cep] [varchar](100) NULL,
+	[endereco] [varchar](255) NULL,
+	[numero] [int] NULL,
+	[complemento] [varchar](200) NULL,
+	[bairro] [varchar](100) NULL,
+	[id_cidade] [int] NOT NULL,
+	[id_condicao_pagamento] [int] NULL,
+	[data_nasc] [datetime] NULL,
+	[data_criacao] [datetime] NULL,
+	[tipo_cliente] [nvarchar](1) NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_cliente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[cpf] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_compras]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_compras](
+	[num_nfc] [int] NOT NULL,
+	[modelo_nfc] [int] NOT NULL,
+	[serie_nfc] [int] NOT NULL,
+	[id_fornecedor] [int] NOT NULL,
+	[id_condicao] [int] NOT NULL,
+	[valor_total] [decimal](10, 2) NOT NULL,
+	[valor_frete] [decimal](10, 2) NOT NULL,
+	[valor_seguro] [decimal](10, 2) NOT NULL,
+	[valor_outras_despesas] [decimal](10, 2) NOT NULL,
+	[data_chegada] [datetime] NOT NULL,
+	[data_emissao] [datetime] NOT NULL,
+	[data_cancelamento] [datetime] NULL,
+	[data_criacao] [datetime] NULL,
+	[status_compra] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[num_nfc] ASC,
+	[modelo_nfc] ASC,
+	[serie_nfc] ASC,
+	[id_fornecedor] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_condicao_pagamento]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_condicao_pagamento](
+	[id_condicao] [int] NOT NULL,
+	[condicao] [varchar](30) NOT NULL,
+	[parcelas] [int] NOT NULL,
+	[taxa] [decimal](10, 2) NOT NULL,
+	[multa] [decimal](10, 2) NOT NULL,
+	[desconto] [decimal](10, 2) NOT NULL,
+	[status_condicao] [varchar](1) NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_condicao] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_contas_pagar]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_contas_pagar](
+	[num_nfc] [int] NOT NULL,
+	[modelo_nfc] [int] NOT NULL,
+	[serie_nfc] [int] NOT NULL,
+	[num_parcela] [int] NOT NULL,
+	[id_fornecedor] [int] NOT NULL,
+	[id_condicao] [int] NOT NULL,
+	[taxa] [decimal](10, 2) NOT NULL,
+	[multa] [decimal](10, 2) NOT NULL,
+	[desconto] [decimal](10, 2) NOT NULL,
+	[valor] [decimal](10, 2) NOT NULL,
+	[pagamento] [decimal](10, 2) NULL,
+	[situacao] [varchar](10) NOT NULL,
+	[data_baixa] [datetime] NULL,
+	[data_vencimento] [datetime] NOT NULL,
+	[data_criacao] [datetime] NOT NULL,
+	[data_ult_alteracao] [datetime] NOT NULL,
+	[id_forma] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[num_nfc] ASC,
+	[modelo_nfc] ASC,
+	[serie_nfc] ASC,
+	[id_fornecedor] ASC,
+	[num_parcela] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_contas_receber]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_contas_receber](
+	[num_nfc] [int] NOT NULL,
+	[modelo_nfc] [int] NOT NULL,
+	[serie_nfc] [int] NOT NULL,
+	[num_parcela] [int] NOT NULL,
+	[id_cliente] [int] NOT NULL,
+	[id_condicao] [int] NOT NULL,
+	[taxa] [decimal](10, 2) NOT NULL,
+	[multa] [decimal](10, 2) NOT NULL,
+	[desconto] [decimal](10, 2) NOT NULL,
+	[valor] [decimal](10, 2) NOT NULL,
+	[pagamento] [decimal](10, 2) NULL,
+	[situacao] [varchar](10) NOT NULL,
+	[data_baixa] [datetime] NULL,
+	[data_vencimento] [datetime] NOT NULL,
+	[data_criacao] [datetime] NOT NULL,
+	[data_ult_alteracao] [datetime] NOT NULL,
+	[id_forma] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[num_nfc] ASC,
+	[modelo_nfc] ASC,
+	[serie_nfc] ASC,
+	[num_parcela] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_estados]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_estados](
+	[id_estado] [int] IDENTITY(1,1) NOT NULL,
+	[nome] [varchar](100) NULL,
+	[uf] [varchar](2) NULL,
+	[id_pais] [int] NOT NULL,
+	[status_estado] [varchar](1) NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_estado] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_forma_pagamento]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_forma_pagamento](
+	[id_forma] [int] IDENTITY(1,1) NOT NULL,
+	[status_forma] [varchar](1) NULL,
+	[forma] [varchar](50) NOT NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_forma] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_fornecedores]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_fornecedores](
+	[id_fornecedor] [int] IDENTITY(1,1) NOT NULL,
+	[status_fornecedor] [varchar](1) NULL,
+	[nome_fantasia] [varchar](100) NULL,
+	[razao_social] [varchar](100) NULL,
+	[data_fundacao] [datetime] NULL,
+	[insc_municipal] [varchar](50) NULL,
+	[insc_estadual] [varchar](50) NULL,
+	[rg] [varchar](30) NULL,
+	[cnpj] [varchar](100) NULL,
+	[email] [varchar](200) NULL,
+	[telefone] [varchar](30) NULL,
+	[celular] [varchar](30) NULL,
+	[cep] [varchar](100) NULL,
+	[endereco] [varchar](255) NULL,
+	[numero] [int] NULL,
+	[complemento] [varchar](200) NULL,
+	[bairro] [varchar](100) NULL,
+	[tipo_fornecedor] [varchar](1) NULL,
+	[data_criacao] [datetime] NULL,
+	[id_condicao_pagamento] [int] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+	[id_cidade] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_fornecedor] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[cnpj] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_funcionarios]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_funcionarios](
+	[id_funcionario] [int] IDENTITY(1,1) NOT NULL,
+	[status_funcionario] [varchar](1) NULL,
+	[nome] [varchar](100) NULL,
+	[apelido] [varchar](100) NULL,
+	[sexo] [varchar](1) NULL,
+	[rg] [varchar](30) NULL,
+	[cpf] [varchar](20) NULL,
+	[email] [varchar](200) NULL,
+	[senha] [varchar](150) NULL,
+	[telefone] [varchar](30) NULL,
+	[celular] [varchar](30) NULL,
+	[cep] [varchar](100) NULL,
+	[endereco] [varchar](255) NULL,
+	[numero] [int] NULL,
+	[complemento] [varchar](200) NULL,
+	[bairro] [varchar](100) NULL,
+	[data_nasc] [datetime] NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+	[id_cargo] [int] NOT NULL,
+	[id_cidade] [int] NOT NULL,
+	[salario] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_funcionario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[apelido] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_itens_compras]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_itens_compras](
+	[num_nfc] [int] NOT NULL,
+	[modelo_nfc] [int] NOT NULL,
+	[serie_nfc] [int] NOT NULL,
+	[id_fornecedor] [int] NOT NULL,
+	[id_produto] [int] NOT NULL,
+	[qtd_produto] [int] NOT NULL,
+	[preco_custo] [decimal](10, 2) NOT NULL,
+	[total_custo] [decimal](10, 2) NOT NULL,
+	[percentual_compra] [decimal](10, 2) NOT NULL,
+	[desconto] [decimal](10, 2) NULL,
+	[media_ponderada] [decimal](10, 2) NOT NULL,
+	[data_criacao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[num_nfc] ASC,
+	[modelo_nfc] ASC,
+	[serie_nfc] ASC,
+	[id_fornecedor] ASC,
+	[id_produto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_itens_vendas]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_itens_vendas](
+	[num_nfv] [int] NOT NULL,
+	[modelo_nfv] [int] NOT NULL,
+	[serie_nfv] [int] NOT NULL,
+	[id_cliente] [int] NOT NULL,
+	[id_item] [int] NOT NULL,
+	[tipo_item] [varchar](1) NOT NULL,
+	[qtd_item] [int] NOT NULL,
+	[preco_unitario] [decimal](10, 2) NOT NULL,
+	[total_item] [decimal](10, 2) NOT NULL,
+	[desconto] [decimal](10, 2) NULL,
+	[data_criacao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[num_nfv] ASC,
+	[modelo_nfv] ASC,
+	[serie_nfv] ASC,
+	[id_cliente] ASC,
+	[id_item] ASC,
+	[tipo_item] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_marcas]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_marcas](
+	[id_marca] [int] IDENTITY(1,1) NOT NULL,
+	[marca] [varchar](255) NULL,
+	[descricao] [varchar](255) NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_marca] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[marca] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_pais]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_pais](
+	[id_pais] [int] IDENTITY(1,1) NOT NULL,
+	[nome] [varchar](100) NULL,
+	[sigla] [varchar](3) NULL,
+	[DDI] [varchar](3) NULL,
+	[status_pais] [varchar](1) NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_pais] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_parcelas]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_parcelas](
+	[id_condicao] [int] NOT NULL,
+	[id_forma] [int] NOT NULL,
+	[num_parcela] [int] NOT NULL,
+	[dias_totais] [int] NOT NULL,
+	[porcentagem] [decimal](5, 2) NULL,
+	[data_criacao] [datetime] NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_condicao] ASC,
+	[num_parcela] ASC,
+	[id_forma] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_produtos]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_produtos](
+	[id_produto] [int] IDENTITY(1,1) NOT NULL,
+	[nome] [varchar](150) NOT NULL,
+	[id_categoria] [int] NOT NULL,
+	[descricao_produto] [varchar](255) NOT NULL,
+	[unidade_medida] [varchar](50) NOT NULL,
+	[id_marca] [int] NULL,
+	[preco_custo] [decimal](10, 2) NULL,
+	[preco_venda] [decimal](10, 2) NULL,
+	[qtd_estoque] [int] NOT NULL,
+	[status_produto] [varchar](1) NULL,
+	[foto] [varbinary](max) NULL,
+	[data_criacao] [datetime] NULL,
+	[referencia] [nvarchar](10) NULL,
+	[data_ult_alteracao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_produto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_servicos]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_servicos](
+	[id_servico] [int] IDENTITY(1,1) NOT NULL,
+	[descricao] [varchar](100) NOT NULL,
+	[status_servico] [varchar](1) NOT NULL,
+	[valor] [decimal](10, 2) NULL,
+	[data_criacao] [datetime] NOT NULL,
+	[data_ult_alteracao] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_servico] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_vendas]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_vendas](
+	[num_nfv] [int] NOT NULL,
+	[modelo_nfv] [int] NOT NULL,
+	[serie_nfv] [int] NOT NULL,
+	[id_cliente] [int] NOT NULL,
+	[id_condicao] [int] NOT NULL,
+	[valor_total] [decimal](10, 2) NOT NULL,
+	[valor_frete] [decimal](10, 2) NOT NULL,
+	[valor_seguro] [decimal](10, 2) NOT NULL,
+	[valor_outras_despesas] [decimal](10, 2) NOT NULL,
+	[data_saida] [datetime] NOT NULL,
+	[data_emissao] [datetime] NOT NULL,
+	[data_cancelamento] [datetime] NULL,
+	[data_criacao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[num_nfv] ASC,
+	[modelo_nfv] ASC,
+	[serie_nfv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UnidadeMedida]    Script Date: 12/2/2025 8:22:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UnidadeMedida](
+	[IdUnidadeMedida] [int] IDENTITY(1,1) NOT NULL,
+	[Nome] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdUnidadeMedida] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Nome] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[tb_cidades]  WITH CHECK ADD FOREIGN KEY([id_estado])
+REFERENCES [dbo].[tb_estados] ([id_estado])
+GO
+ALTER TABLE [dbo].[tb_clientes]  WITH CHECK ADD FOREIGN KEY([id_cidade])
+REFERENCES [dbo].[tb_cidades] ([id_cidade])
+GO
+ALTER TABLE [dbo].[tb_clientes]  WITH CHECK ADD FOREIGN KEY([id_condicao_pagamento])
+REFERENCES [dbo].[tb_condicao_pagamento] ([id_condicao])
+GO
+ALTER TABLE [dbo].[tb_compras]  WITH CHECK ADD FOREIGN KEY([id_fornecedor])
+REFERENCES [dbo].[tb_fornecedores] ([id_fornecedor])
+GO
+ALTER TABLE [dbo].[tb_contas_pagar]  WITH CHECK ADD FOREIGN KEY([id_condicao])
+REFERENCES [dbo].[tb_condicao_pagamento] ([id_condicao])
+GO
+ALTER TABLE [dbo].[tb_contas_pagar]  WITH CHECK ADD FOREIGN KEY([id_fornecedor])
+REFERENCES [dbo].[tb_fornecedores] ([id_fornecedor])
+GO
+ALTER TABLE [dbo].[tb_contas_pagar]  WITH CHECK ADD FOREIGN KEY([id_forma])
+REFERENCES [dbo].[tb_forma_pagamento] ([id_forma])
+GO
+ALTER TABLE [dbo].[tb_contas_pagar]  WITH CHECK ADD FOREIGN KEY([num_nfc], [modelo_nfc], [serie_nfc], [id_fornecedor])
+REFERENCES [dbo].[tb_compras] ([num_nfc], [modelo_nfc], [serie_nfc], [id_fornecedor])
+GO
+ALTER TABLE [dbo].[tb_contas_receber]  WITH CHECK ADD FOREIGN KEY([id_cliente])
+REFERENCES [dbo].[tb_clientes] ([id_cliente])
+GO
+ALTER TABLE [dbo].[tb_contas_receber]  WITH CHECK ADD FOREIGN KEY([id_condicao])
+REFERENCES [dbo].[tb_condicao_pagamento] ([id_condicao])
+GO
+ALTER TABLE [dbo].[tb_contas_receber]  WITH CHECK ADD FOREIGN KEY([id_forma])
+REFERENCES [dbo].[tb_forma_pagamento] ([id_forma])
+GO
+ALTER TABLE [dbo].[tb_contas_receber]  WITH CHECK ADD FOREIGN KEY([num_nfc], [modelo_nfc], [serie_nfc])
+REFERENCES [dbo].[tb_vendas] ([num_nfv], [modelo_nfv], [serie_nfv])
+GO
+ALTER TABLE [dbo].[tb_estados]  WITH CHECK ADD FOREIGN KEY([id_pais])
+REFERENCES [dbo].[tb_pais] ([id_pais])
+GO
+ALTER TABLE [dbo].[tb_fornecedores]  WITH CHECK ADD FOREIGN KEY([id_cidade])
+REFERENCES [dbo].[tb_cidades] ([id_cidade])
+GO
+ALTER TABLE [dbo].[tb_fornecedores]  WITH CHECK ADD FOREIGN KEY([id_condicao_pagamento])
+REFERENCES [dbo].[tb_condicao_pagamento] ([id_condicao])
+GO
+ALTER TABLE [dbo].[tb_funcionarios]  WITH CHECK ADD FOREIGN KEY([id_cargo])
+REFERENCES [dbo].[tb_cargos] ([id_cargo])
+GO
+ALTER TABLE [dbo].[tb_funcionarios]  WITH CHECK ADD FOREIGN KEY([id_cidade])
+REFERENCES [dbo].[tb_cidades] ([id_cidade])
+GO
+ALTER TABLE [dbo].[tb_itens_compras]  WITH CHECK ADD FOREIGN KEY([id_fornecedor])
+REFERENCES [dbo].[tb_fornecedores] ([id_fornecedor])
+GO
+ALTER TABLE [dbo].[tb_itens_compras]  WITH CHECK ADD FOREIGN KEY([id_produto])
+REFERENCES [dbo].[tb_produtos] ([id_produto])
+GO
+ALTER TABLE [dbo].[tb_itens_compras]  WITH CHECK ADD FOREIGN KEY([num_nfc], [modelo_nfc], [serie_nfc], [id_fornecedor])
+REFERENCES [dbo].[tb_compras] ([num_nfc], [modelo_nfc], [serie_nfc], [id_fornecedor])
+GO
+ALTER TABLE [dbo].[tb_itens_vendas]  WITH CHECK ADD FOREIGN KEY([num_nfv], [modelo_nfv], [serie_nfv])
+REFERENCES [dbo].[tb_vendas] ([num_nfv], [modelo_nfv], [serie_nfv])
+GO
+ALTER TABLE [dbo].[tb_parcelas]  WITH CHECK ADD FOREIGN KEY([id_condicao])
+REFERENCES [dbo].[tb_condicao_pagamento] ([id_condicao])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[tb_parcelas]  WITH CHECK ADD FOREIGN KEY([id_forma])
+REFERENCES [dbo].[tb_forma_pagamento] ([id_forma])
+GO
+ALTER TABLE [dbo].[tb_produtos]  WITH CHECK ADD FOREIGN KEY([id_categoria])
+REFERENCES [dbo].[tb_categorias] ([Id])
+GO
+ALTER TABLE [dbo].[tb_produtos]  WITH CHECK ADD FOREIGN KEY([id_marca])
+REFERENCES [dbo].[tb_marcas] ([id_marca])
+GO
+ALTER TABLE [dbo].[tb_vendas]  WITH CHECK ADD FOREIGN KEY([id_cliente])
+REFERENCES [dbo].[tb_clientes] ([id_cliente])
+GO
